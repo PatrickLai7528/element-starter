@@ -1,30 +1,44 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <div>
-      <el-button @click="startHacking">Start</el-button>
-    </div>
-  </div>
+    <el-container class = "basicGlobalStyle">
+        <el-aside>
+            <ac-menu></ac-menu>
+        </el-aside>
+        <el-main>
+            <ac-display></ac-display>
+        </el-main>
+    </el-container>
 </template>
 
 <script>
-export default {
-  methods: {
-    startHacking () {
-      this.$notify({
-        title: 'It works!',
-        type: 'success',
-        message: 'We\'ve laid the ground work for you. It\'s time for you to build something epic!',
-        duration: 5000
-      })
+    import acMenu from './assets/components/ac-menu.vue';
+    import acDisplay from './assets/components/ac-display.vue';
+
+    export default {
+        components: {
+            acMenu,
+            acDisplay
+        },
+        data() {
+            return {
+                currentDate: new Date(),
+                dialogVisible: false
+            };
+        },
+        methods: {
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        done();
+                    })
+                    .catch(_ => {
+                    });
+            }
+        }
     }
-  }
-}
 </script>
 
 <style>
-#app {
-  font-family: Helvetica, sans-serif;
-  text-align: center;
-}
+    .basicGlobalStyle{
+        font-family: Microsoft YaHei;
+    }
 </style>
